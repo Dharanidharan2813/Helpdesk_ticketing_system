@@ -148,13 +148,13 @@ app_license = "mit"
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
+scheduler_events = {
 # 	"all": [
 # 		"ticket_system.tasks.all"
 # 	],
-# 	"daily": [
-# 		"ticket_system.tasks.daily"
-# 	],
+ 	"daily": [
+ 		"ticket_system.helpdesk_ticketing_system.doctype.ticket.ticket.deadline"
+ 	],
 # 	"hourly": [
 # 		"ticket_system.tasks.hourly"
 # 	],
@@ -164,7 +164,7 @@ app_license = "mit"
 # 	"monthly": [
 # 		"ticket_system.tasks.monthly"
 # 	],
-# }
+}
 
 # Testing
 # -------

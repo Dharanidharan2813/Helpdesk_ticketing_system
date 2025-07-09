@@ -2,17 +2,15 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "format:{first_name} {last_name}",
- "creation": "2025-07-02 11:05:40.177663",
+ "creation": "2025-07-09 12:13:25.870217",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "first_name",
   "last_name",
   "full_name",
-  "column_break_kywn",
-  "email_id",
-  "phone_number",
-  "location",
+  "manager_email",
+  "manager_phone",
   "user_id"
  ],
  "fields": [
@@ -29,32 +27,24 @@
   {
    "fieldname": "full_name",
    "fieldtype": "Data",
-   "label": "Full Name",
-   "unique": 1
+   "in_list_view": 1,
+   "label": "Full Name"
   },
   {
-   "fieldname": "column_break_kywn",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "email_id",
+   "fieldname": "manager_email",
    "fieldtype": "Data",
-   "label": "Email id"
+   "in_list_view": 1,
+   "label": "Manager Email"
   },
   {
-   "fieldname": "phone_number",
+   "fieldname": "manager_phone",
    "fieldtype": "Phone",
-   "label": "Phone Number"
-  },
-  {
-   "fieldname": "location",
-   "fieldtype": "Data",
-   "label": "Location"
+   "in_list_view": 1,
+   "label": "Manager Phone"
   },
   {
    "fieldname": "user_id",
    "fieldtype": "Link",
-   "hidden": 1,
    "label": "User Id",
    "options": "User"
   }
@@ -62,10 +52,10 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-07-09 16:41:43.022828",
+ "modified": "2025-07-09 16:07:48.164030",
  "modified_by": "Administrator",
  "module": "Helpdesk Ticketing System",
- "name": "Client",
+ "name": "Manager",
  "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
@@ -87,7 +77,17 @@
    "print": 1,
    "read": 1,
    "report": 1,
-   "role": "Client",
+   "role": "manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Developer",
    "share": 1,
    "write": 1
   }

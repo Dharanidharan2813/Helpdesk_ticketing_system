@@ -13,7 +13,9 @@
   "client",
   "client_email",
   "developer",
-  "developer_email"
+  "developer_email",
+  "manager",
+  "manager_email"
  ],
  "fields": [
   {
@@ -33,13 +35,13 @@
   {
    "fieldname": "project_name",
    "fieldtype": "Data",
-   "label": "Project_Name",
+   "label": "Project Name",
    "unique": 1
   },
   {
    "fieldname": "project_link",
    "fieldtype": "Data",
-   "label": "Project_Link"
+   "label": "Project Link"
   },
   {
    "fieldname": "client",
@@ -57,20 +59,33 @@
    "fetch_from": "developer.developer_email",
    "fieldname": "developer_email",
    "fieldtype": "Data",
-   "label": "Developer_Email"
+   "label": "Developer Email"
   },
   {
    "fetch_from": "client.email_id",
    "fieldname": "client_email",
    "fieldtype": "Data",
-   "label": "Client_Email"
+   "label": "Client Email"
+  },
+  {
+   "fetch_from": "developer.manager",
+   "fieldname": "manager",
+   "fieldtype": "Data",
+   "label": "Manager",
+   "options": "Manager"
+  },
+  {
+   "fetch_from": "developer.manager_email",
+   "fieldname": "manager_email",
+   "fieldtype": "Data",
+   "label": "Manager Email"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-07-02 12:39:06.441752",
+ "modified": "2025-07-09 16:24:08.571788",
  "modified_by": "Administrator",
  "module": "Helpdesk Ticketing System",
  "name": "Project",
@@ -86,6 +101,22 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Client",
+   "select": 1,
    "share": 1,
    "submit": 1,
    "write": 1

@@ -6,7 +6,8 @@ frappe.query_reports["Open Tickets by Priority"] = {
         {
             fieldname: "from_date",
             label: "From Date",
-            fieldtype: "Date"
+            fieldtype: "Date",
+            //reqd: 1
         },
         {
             fieldname: "to_date",

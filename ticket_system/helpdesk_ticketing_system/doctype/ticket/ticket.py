@@ -12,9 +12,9 @@ class Ticket(Document):
          self.send_confirmation_email()
         
     def before_save(self):
-        self.deadline()
         self.sendmail()
-          
+        # self.deadline()
+        
     def set_deadline(self):
         self.from_date = frappe.utils.nowdate()
         today = frappe.utils.nowdate()
@@ -83,43 +83,15 @@ class Ticket(Document):
                 message=f"Dear {manager},\n\nThe ticket has been Completed successfully.\n\nThanks,\nSupport Team"
             )
             
-    def deadline(self):
-        manager="dharanijeeva463@gmail.com"
-        from_date = self.get("from_date")
-        deadline = self.get("deadline")
-
-        if not from_date or not deadline:
-            return
-
-        if isinstance(from_date, str):
-            from_date = frappe.utils.get_datetime(from_date)
-        if isinstance(deadline, str):
-            deadline = frappe.utils.get_datetime(deadline)
-
-        if from_date > deadline:
-            self.status = "Failed"
-            frappe.sendmail(
-                recipients=[manager],
-                subject=f"Deadline Error for Ticket {self.name}",
-                message=f"Dear Manager,<br><br>The From Date for Ticket {self.name} is after the Deadline.<br><br>Thanks,<br>Support Team"
-            )
-            frappe.sendmail(
-                recipients=[self.client_email],
-                subject=f"Deadline Error for Ticket {self.name}",
-                message=f"Dear {self.client},<br><br>The From Date for your Ticket {self.name} is after the Deadline.<br><br>Thanks,<br>Support Team"
-            )
     
-
-
 @frappe.whitelist()
-
 def add_comment_and_notify(ticket, comment_text, role):
     manager = "dharanijeeva463@gmail.com"
     doc = frappe.get_doc("Ticket", ticket)
     if doc.status == "Closed":
         frappe.throw("You cannot comment on a closed ticket.")
 
-    if role == "User":
+    if role == "Client":
         client = doc.get("client_email")
         recipient_email = doc.get("developer_email")
         doc.status = "In Progress"
@@ -148,3 +120,47 @@ def add_comment_and_notify(ticket, comment_text, role):
             message=comment_text,
             sender="support@yourcompany.com"  
         )
+
+@frappe.whitelist()
+def get_user_role_for_ticket():
+    user = frappe.session.user
+
+    developer = frappe.get_value("Developer", {"user_id": user}, "name")
+    if developer:
+        return "Developer"
+
+    client = frappe.get_value("Client", {"user_id": user}, "name")
+    if client:
+        return "Client"
+    
+    return "Manager"
+
+def deadline(self):
+        frappe.log_error("Deadline Check", "Checking deadline for ticket")
+        print("Checking deadline for ticket")
+        manager="dharanijeeva463@gmail.com"
+        from_date = self.get("from_date")
+        deadline = self.get("deadline")
+
+        if not from_date or not deadline:
+            return
+
+        if isinstance(from_date, str):
+            from_date = frappe.utils.get_datetime(from_date)
+        if isinstance(deadline, str):
+            deadline = frappe.utils.get_datetime(deadline)
+
+        if from_date > deadline:
+            self.status = "Failed"
+            frappe.sendmail(
+                recipients=[manager],
+                subject=f"Deadline Error for Ticket {self.name}",
+                message=f"Dear Manager,<br><br>The From Date for Ticket {self.name} is after the Deadline.<br><br>Thanks,<br>Support Team"
+            )
+            frappe.sendmail(
+                recipients=[self.client_email],
+                subject=f"Deadline Error for Ticket {self.name}",
+                message=f"Dear {self.client},<br><br>The From Date for your Ticket {self.name} is after the Deadline.<br><br>Thanks,<br>Support Team"
+            )
+        if self.docstatus == 1 and self.status == "Failed":
+            self.cancel()

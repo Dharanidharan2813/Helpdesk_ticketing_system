@@ -18,6 +18,8 @@
   "priority",
   "from_date",
   "dead_line",
+  "manager",
+  "manager_email",
   "section_break_vkpr",
   "ticket_comments"
  ],
@@ -39,8 +41,59 @@
   {
    "fieldname": "project_id",
    "fieldtype": "Link",
-   "label": "Project_id",
+   "label": "Project id",
    "options": "Project"
+  },
+  {
+   "fetch_from": "project_id.developer_email",
+   "fieldname": "developer_email",
+   "fieldtype": "Data",
+   "label": "Developer Email"
+  },
+  {
+   "fetch_from": "project_id.client_email",
+   "fieldname": "client_email",
+   "fieldtype": "Data",
+   "label": "Client Email"
+  },
+  {
+   "fieldname": "priority",
+   "fieldtype": "Select",
+   "label": "Priority",
+   "options": "High\nMedium\nLow"
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "dead_line",
+   "fieldtype": "Date",
+   "label": "Dead Line"
+  },
+  {
+   "fieldname": "column_break_mxgw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Open\nIn Progress\nClosed\nFailed",
+   "read_only": 1
+  },
+  {
+   "fieldname": "ticket_comments",
+   "fieldtype": "Table",
+   "label": "Ticket Comments",
+   "options": "Ticket Comment"
+  },
+  {
+   "fieldname": "section_break_vkpr",
+   "fieldtype": "Section Break"
   },
   {
    "fetch_from": "project_id.client",
@@ -52,63 +105,27 @@
    "fetch_from": "project_id.developer",
    "fieldname": "developer",
    "fieldtype": "Data",
+   "ignore_user_permissions": 1,
    "label": "Developer"
   },
   {
-   "fetch_from": "project_id.developer_email",
-   "fieldname": "developer_email",
+   "fetch_from": "project_id.manager",
+   "fieldname": "manager",
    "fieldtype": "Data",
-   "label": "Developer_Email"
+   "label": "Manager"
   },
   {
-   "fetch_from": "project_id.client_email",
-   "fieldname": "client_email",
+   "fetch_from": "project_id.manager_email",
+   "fieldname": "manager_email",
    "fieldtype": "Data",
-   "label": "Client_Email"
-  },
-  {
-   "fieldname": "priority",
-   "fieldtype": "Select",
-   "label": "Priority",
-   "options": "High\nMedium\nLow"
-  },
-  {
-   "fieldname": "from_date",
-   "fieldtype": "Date",
-   "label": "From_date"
-  },
-  {
-   "fieldname": "dead_line",
-   "fieldtype": "Date",
-   "label": "Dead_Line"
-  },
-  {
-   "fieldname": "column_break_mxgw",
-   "fieldtype": "Column Break"
-  },
-  {
-   "allow_on_submit": 1,
-   "fieldname": "status",
-   "fieldtype": "Select",
-   "label": "Status",
-   "options": "Open\nIn Progress\nClosed\nFailed"
-  },
-  {
-   "fieldname": "ticket_comments",
-   "fieldtype": "Table",
-   "label": "Ticket Comments",
-   "options": "Ticket Comment"
-  },
-  {
-   "fieldname": "section_break_vkpr",
-   "fieldtype": "Section Break"
+   "label": "Manager Email"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-07-03 18:02:15.601835",
+ "modified": "2025-07-09 16:41:34.467887",
  "modified_by": "Administrator",
  "module": "Helpdesk Ticketing System",
  "name": "Ticket",
@@ -126,6 +143,42 @@
    "role": "System Manager",
    "share": 1,
    "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Client",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Developer",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "manager",
+   "share": 1,
    "write": 1
   }
  ],
